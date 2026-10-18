@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#7357e8">
+<meta name="description" content="ساعة بتلعب: لعبة عربية تفاعلية لتعليم الأطفال قراءة الساعة خطوة خطوة.">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="ساعة بتلعب">
+<link rel="manifest" href="./manifest.webmanifest">
+<link rel="icon" href="./icons/icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="./icons/icon-192.png">
+<title>ساعة بتلعب 🕒</title>
+<style>
+:root{--purple:#7357e8;--purple-dark:#5140b8;--ink:#29254f;--muted:#777392;--paper:#fffdf9;--mint:#dff9ed;--yellow:#fff0a8;--pink:#ffe1ec;--blue:#e2f4ff;--orange:#ff875f;--sky:#258cde;--line:#e9e4ff;--shadow:0 12px 32px #44328b14}
+*{box-sizing:border-box}html{background:#f5f1ff}body{margin:0;min-height:100vh;color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",Tahoma,Arial,sans-serif;background:radial-gradient(ellipse at 5% 0%,#e3f8ff 0,transparent 36%),radial-gradient(ellipse at 100% 25%,#ffe9f2 0,transparent 34%),linear-gradient(160deg,#f5f1ff,#fff9e9 68%,#eafbf4);-webkit-tap-highlight-color:transparent}
+button{font:inherit;border:0;cursor:pointer;touch-action:manipulation}button:focus-visible{outline:3px solid #18a884;outline-offset:3px}button:disabled{opacity:.55;cursor:not-allowed}
+.app{width:min(100%,980px);margin:auto;padding:calc(12px + env(safe-area-inset-top)) 14px calc(22px + env(safe-area-inset-bottom))}
+header{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:14px}.brand{display:flex;align-items:center;gap:10px;min-width:0}.brandmark{width:56px;height:56px;border-radius:19px;background:linear-gradient(145deg,#8b75ff,#634be0);display:grid;place-items:center;font-size:30px;box-shadow:0 5px 0 #5140b8;flex-shrink:0}.brand h1{margin:0;font-size:clamp(1.3rem,4vw,2rem);letter-spacing:-.5px}.brand p{margin:2px 0 0;color:var(--muted);font-size:.86rem}.header-actions{display:flex;gap:8px;align-items:center}.star-pill,.icon-btn{background:#fff;border:1px solid #f0ebff;border-radius:15px;box-shadow:0 3px 0 #e8e2ff;padding:9px 12px;font-weight:850;white-space:nowrap}.icon-btn{width:44px;height:44px;padding:0;font-size:1.2rem}
+.tabs{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;margin-bottom:12px}.tab{background:#fff;color:#716b91;border:2px solid transparent;border-radius:16px;padding:11px 7px;font-size:.93rem;font-weight:850;box-shadow:0 3px 0 #e8e2f7}.tab.active{background:var(--purple);color:#fff;box-shadow:0 4px 0 var(--purple-dark)}
+.panel{background:rgba(255,255,255,.94);border:1px solid #fff;border-radius:26px;padding:clamp(14px,3vw,24px);box-shadow:var(--shadow)}
+.welcome{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:15px}.welcome h2{font-size:clamp(1.2rem,4vw,1.7rem);margin:0 0 5px}.welcome p{margin:0;color:var(--muted);line-height:1.55}.owl{width:66px;height:66px;flex-shrink:0;display:grid;place-items:center;font-size:2.4rem;border-radius:24px;background:var(--yellow);box-shadow:0 4px 0 #ead77d;animation:float 3s ease-in-out infinite}@keyframes float{0%,100%{transform:translateY(0) rotate(-2deg)}50%{transform:translateY(-4px) rotate(2deg)}}
+.game-grid{display:grid;grid-template-columns:minmax(0,1.02fr) minmax(0,.98fr);gap:18px;align-items:center}.clock-area{max-width:390px;margin:auto;width:100%}.clock{display:block;width:100%;height:auto;touch-action:none;user-select:none;overflow:visible}.clock-face{fill:#fff;stroke:#e3ddff;stroke-width:8;filter:drop-shadow(0 8px 0 #e9e4ff)}.tick{stroke:#c9c4e7;stroke-width:2.5;stroke-linecap:round}.tick.major{stroke:#8e83d8;stroke-width:4}.hour-num{font-size:18px;font-weight:900;fill:#35305f;text-anchor:middle;dominant-baseline:middle}.minute-num{font-size:10px;font-weight:700;fill:#a09abb;text-anchor:middle;dominant-baseline:middle}.hand{stroke-linecap:round;cursor:grab;touch-action:none;filter:drop-shadow(0 2px 1px #0001)}.hand:active{cursor:grabbing}.hour-hand{stroke:var(--orange);stroke-width:10}.minute-hand{stroke:var(--sky);stroke-width:6.5}.hand-cap{fill:var(--purple);stroke:#fff;stroke-width:3}.clock-legend{display:flex;justify-content:center;gap:14px;flex-wrap:wrap;font-weight:800;font-size:.83rem;color:#77718f;margin-top:4px}.dot{display:inline-block;width:10px;height:10px;border-radius:50%;margin-left:5px}.clock-hint{text-align:center;color:#938daa;font-size:.78rem;margin-top:6px}
+.play-side{display:flex;flex-direction:column;gap:10px;min-width:0}.mission{background:var(--blue);border-radius:20px;padding:15px}.mission small{font-weight:900;color:#4d7796}.mission h2{margin:5px 0;font-size:clamp(1.2rem,4vw,1.75rem);line-height:1.35}.mission p{margin:0;color:#49667b;line-height:1.55}.digital{background:#f5f2ff;border:2px solid #ece7ff;border-radius:16px;text-align:center;padding:10px;font-size:1.55rem;font-weight:950;letter-spacing:1px}.controls{display:grid;grid-template-columns:1fr 1fr;gap:8px}.btn{min-height:46px;border-radius:15px;padding:10px 12px;font-weight:900;box-shadow:0 4px 0 #ddd7ef;transition:transform .08s,filter .12s}.btn:active{transform:translateY(2px);box-shadow:0 2px 0 #ddd7ef}.btn-light{background:#fff;color:#514b83;border:1px solid #eee9ff}.btn-main{background:var(--purple);color:#fff;box-shadow:0 4px 0 var(--purple-dark)}.btn-sun{background:var(--yellow);color:#69541c;box-shadow:0 4px 0 #e9d67a}.btn-mint{background:var(--mint);color:#197451;box-shadow:0 4px 0 #bcebd8}.btn-wide{width:100%}.feedback{min-height:55px;border-radius:16px;padding:12px 13px;display:flex;align-items:center;gap:8px;background:#f8f7fc;color:#625d81;font-weight:800;line-height:1.5}.feedback.good{background:#dff9ed;color:#176e4c;animation:pop .25s ease-out}.feedback.try{background:#fff2d8;color:#805916}@keyframes pop{50%{transform:scale(1.015)}}.progress-track{height:9px;border-radius:99px;background:#eeeafd;overflow:hidden}.progress-fill{height:100%;width:0;background:linear-gradient(90deg,#17c79a,#7357e8);border-radius:99px;transition:width .35s}.progress-row{display:flex;justify-content:space-between;gap:8px;color:#8983a4;font-size:.8rem;font-weight:750}.helper{background:#fff8df;border-radius:18px;padding:13px 14px;line-height:1.7;color:#62562b}.helper strong{color:#5945c4}.hidden{display:none!important}.learn-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.learn-card{border-radius:19px;padding:14px;line-height:1.65}.learn-card h3{margin:0 0 5px;font-size:1.05rem}.learn-card p{margin:0}.learn-card.orange{background:#fff0e9}.learn-card.blue{background:#e6f5ff}.count-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:12px}.count-chip{background:#f8f6ff;border:1px solid #eee9ff;border-radius:14px;padding:10px 4px;text-align:center;font-weight:900}.count-chip b{display:block;font-size:1.12rem}.count-chip span{font-size:.76rem;color:#77718f}.stats-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.stat{background:#f8f6ff;border-radius:17px;text-align:center;padding:14px 5px}.stat b{display:block;font-size:1.6rem}.stat span{color:#827c9f;font-size:.8rem}.badge-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}.award{background:#fff7d5;border:1px solid #f2e4a6;border-radius:14px;padding:9px 11px;font-weight:800;font-size:.86rem}.settings-row{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid #f0edfa}.settings-row:last-child{border:0}.switch{width:54px;height:30px;border-radius:99px;background:#d7d2e8;padding:3px;display:flex;align-items:center;transition:.2s;flex-shrink:0}.switch span{width:24px;height:24px;border-radius:50%;background:white;box-shadow:0 1px 3px #0002;transition:.2s}.switch.on{background:#6cceaa;justify-content:flex-end}.footer{text-align:center;color:#9690ae;font-size:.76rem;line-height:1.7;margin:14px 0 0}.toast{position:fixed;bottom:calc(18px + env(safe-area-inset-bottom));left:50%;transform:translateX(-50%);background:#29254f;color:white;padding:12px 17px;border-radius:15px;box-shadow:0 8px 25px #1c174333;z-index:20;max-width:90vw;text-align:center;font-weight:800}.stars-burst{position:absolute;pointer-events:none;font-size:1.2rem;animation:burst .8s ease-out forwards}@keyframes burst{from{opacity:1;transform:translateY(0) scale(.6)}to{opacity:0;transform:translateY(-50px) scale(1.4)}}
+@media(max-width:680px){.app{padding-left:10px;padding-right:10px}.game-grid{grid-template-columns:1fr;gap:8px}.clock-area{max-width:min(78vw,320px)}.play-side{gap:9px}.mission{padding:13px}.tabs{gap:6px}.tab{font-size:.82rem;padding:10px 4px}.panel{padding:14px;border-radius:22px}.owl{width:54px;height:54px;font-size:2rem;border-radius:19px}.brandmark{width:48px;height:48px;font-size:26px;border-radius:16px}.brand p{font-size:.76rem}.star-pill{padding:8px 10px}.clock-legend{font-size:.76rem}.learn-grid{grid-template-columns:1fr}.count-grid{grid-template-columns:repeat(3,1fr)}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<main class="app">
+<header>
+ <div class="brand"><div class="brandmark" aria-hidden="true">🕒</div><div><h1>ساعة بتلعب</h1><p>كل دقيقة مغامرة جديدة!</p></div></div>
+ <div class="header-actions"><div class="star-pill">⭐ <span id="starsTop">٠</span></div><button class="icon-btn" id="settingsBtn" aria-label="إعدادات اللعبة" title="إعدادات">⚙️</button></div>
+</header>
+<nav class="tabs" aria-label="أقسام اللعبة">
+ <button class="tab active" data-view="play">🎮 نلعب</button>
+ <button class="tab" data-view="learn">💡 نتعلّم</button>
+ <button class="tab" data-view="progress">🏅 إنجازاتي</button>
+ <button class="tab" data-view="parent">👨‍👩‍👧 للأهل</button>
+</nav>
+
+<section class="panel" id="playView">
+ <div class="welcome"><div><h2 id="greeting">أهلًا يا بطلة الساعة! 🌈</h2><p id="subtitle">العقرب البرتقاني للساعات، والأزرق للدقايق.</p></div><div class="owl" aria-label="بومة مرحة">🦉</div></div>
+ <div class="game-grid">
+  <div class="clock-area">
+   <svg id="clock" class="clock" viewBox="0 0 320 320" role="img" aria-label="ساعة بعقارب قابلة للتحريك">
+    <circle class="clock-face" cx="160" cy="160" r="145"/>
+    <g id="ticks"></g><g id="minuteLabels"></g><g id="numbers"></g>
+    <line id="hourHand" class="hand hour-hand" x1="160" y1="160" x2="160" y2="95" tabindex="0" role="slider" aria-label="عقرب الساعات"/>
+    <line id="minuteHand" class="hand minute-hand" x1="160" y1="160" x2="160" y2="55" tabindex="0" role="slider" aria-label="عقرب الدقائق"/>
+    <circle class="hand-cap" cx="160" cy="160" r="8"/>
+   </svg>
+   <div class="clock-legend"><span><i class="dot" style="background:var(--orange)"></i>العقرب القصير: الساعات</span><span><i class="dot" style="background:var(--sky)"></i>العقرب الطويل: الدقايق</span></div>
+   <div class="clock-hint">اسحبي طرف العقرب بإصبعك أو استخدمي الأزرار 👆</div>
+  </div>
+  <div class="play-side">
+   <div class="mission"><small id="roundLabel">مهمّة الساعة</small><h2 id="questionTitle">خلّينا نجرّب!</h2><p id="questionText">حرّكي العقارب وشوفي الوقت بيتغيّر إزاي.</p></div>
+   <div class="digital" id="digitalTime" aria-live="polite">٣:٠٠</div>
+   <div class="controls">
+    <button class="btn btn-light" id="hourBack">◀ ساعة</button><button class="btn btn-light" id="hourForward">ساعة ▶</button>
+    <button class="btn btn-light" id="minuteBack">◀ ٥ دقايق</button><button class="btn btn-light" id="minuteForward">٥ دقايق ▶</button>
+   </div>
+   <div class="controls"><button class="btn btn-sun" id="hearBtn">🔊 اسمعي الوقت</button><button class="btn btn-mint" id="hintBtn">💡 ساعديني</button></div>
+   <button class="btn btn-main btn-wide" id="checkBtn">اتأكدي من إجابتي ✓</button>
+   <div id="feedback" class="feedback" aria-live="polite">خدي وقتك يا بطلة، وأنا معاكي 💜</div>
+   <div class="progress-track"><div class="progress-fill" id="progressBar"></div></div>
+   <div class="progress-row"><span id="progressLabel">تجربة حرّة</span><span id="accuracyLabel">كل محاولة بتعلّمنا!</span></div>
+  </div>
+ </div>
+</section>
+
+<section class="panel hidden" id="learnView">
+ <div class="welcome"><div><h2>سرّ العقارب السحري ✨</h2><p>كل عقرب ليه شغلانة مختلفة.</p></div><div class="owl">💡</div></div>
+ <div class="learn-grid">
+  <article class="learn-card orange"><h3>🟠 العقرب القصير = الساعة</h3><p>ده بيقول لنا الساعة كام. لما يكون عند رقم ٤ والوقت بالظبط، نقول: الساعة أربعة.</p></article>
+  <article class="learn-card blue"><h3>🔵 العقرب الطويل = الدقايق</h3><p>كل رقم بنعدّيه يزوّد ٥ دقايق. رقم ٣ يعني ١٥ دقيقة، ورقم ٦ يعني ٣٠ دقيقة أو «ونص».</p></article>
+ </div>
+ <h3 style="margin:17px 0 7px">عدّي معايا بالخمسات 🎵</h3>
+ <div class="count-grid">
+  <div class="count-chip"><b>١٢ → ٠</b><span>بالظبط</span></div><div class="count-chip"><b>١ → ٥</b><span>خمس دقايق</span></div><div class="count-chip"><b>٢ → ١٠</b><span>عشر دقايق</span></div><div class="count-chip"><b>٣ → ١٥</b><span>ربع ساعة</span></div><div class="count-chip"><b>٤ → ٢٠</b><span>عشرين دقيقة</span></div><div class="count-chip"><b>٥ → ٢٥</b><span>خمسة وعشرين</span></div><div class="count-chip"><b>٦ → ٣٠</b><span>نص ساعة</span></div><div class="count-chip"><b>٩ → ٤٥</b><span>إلا ربع</span></div><div class="count-chip"><b>١١ → ٥٥</b><span>إلا خمسة</span></div>
+ </div>
+ <div class="helper" style="margin-top:14px"><strong>حيلة البومة 🦉:</strong> الأول بصّي على العقرب القصير واعرفي الساعة، وبعدها اتبعي العقرب الطويل وعدّي بالخمسات. لو العقرب القصير بين رقمين، بنقول الساعة اللي عداها.</div>
+ <div class="controls" style="margin-top:14px"><button class="btn btn-main" id="practiceFromLearn">يلا نتدرّب 🎮</button><button class="btn btn-sun" id="hearLesson">🔊 اسمعي الشرح</button></div>
+</section>
+
+<section class="panel hidden" id="progressView">
+ <div class="welcome"><div><h2>إنجازاتك يا بطلة 🏅</h2><p>كل محاولة خطوة لقدّام!</p></div><div class="owl">🌟</div></div>
+ <div class="stats-grid"><div class="stat"><b id="statStars">٠</b><span>نجمة</span></div><div class="stat"><b id="statCorrect">٠</b><span>إجابة صحيحة</span></div><div class="stat"><b id="statRounds">٠</b><span>محاولة</span></div></div>
+ <div class="badge-row" id="awards"></div>
+ <div class="helper" style="margin-top:14px" id="progressAdvice">تدرّبي كل يوم خمس دقايق، ومع الوقت قراءة الساعة هتبقى سهلة.</div>
+ <button class="btn btn-main btn-wide" style="margin-top:14px" id="continueBtn">كمّلي المغامرة 🚀</button>
+</section>
+
+<section class="panel hidden" id="parentView">
+ <div class="welcome"><div><h2>ركن الأهل 💜</h2><p>إعدادات بسيطة لمتابعة التعلّم.</p></div><div class="owl">🧑‍🏫</div></div>
+ <div class="settings-row"><div><b>الصوت المنطوق</b><div class="sound-note">استخدمي صوت العربية المتاح في الجهاز.</div></div><button class="switch on" id="speechToggle" aria-label="تشغيل الصوت المنطوق"><span></span></button></div>
+ <div class="settings-row"><div><b>نغمات التشجيع</b><div class="sound-note">نغمات قصيرة مولّدة داخل اللعبة.</div></div><button class="switch on" id="soundToggle" aria-label="تشغيل نغمات التشجيع"><span></span></button></div>
+ <div class="settings-row"><div><b>مستوى التدريب</b><div class="sound-note">اختاري المرحلة المناسبة لبنتك.</div></div><select id="levelSelect" style="border:1px solid #e7e0fb;border-radius:12px;padding:10px;background:white;color:var(--ink);font:inherit"><option value="hours">الساعات الكاملة</option><option value="five">الدقايق بالخمسات</option><option value="mixed">ساعات ودقايق مع بعض</option></select></div>
+ <div class="helper" style="margin-top:14px">الصوت المنطوق يعتمد على محرك النطق في المتصفح والأصوات المثبتة على الموبايل. نغمات التشجيع مدمجة ولا تحتاج إنترنت. لا يتم إرسال بيانات بنتك إلى أي خادم.</div>
+ <button class="btn btn-light btn-wide" style="margin-top:14px" id="testVoice">جرّبي الصوت 🔊</button>
+ <button class="btn btn-light btn-wide" style="margin-top:9px" id="resetProgress">مسح النجوم والتقدّم</button>
+</section>
+
+<footer class="footer">صُنعت بحب عشان كل دقيقة تبقى مغامرة 💜<br>التقدّم بيتحفظ على نفس الجهاز · مفيش حسابات أو اشتراكات.</footer>
+</main>
+<div id="toast" class="toast hidden" role="status"></div>
+<script>
+(()=> {
+const $=id=>document.getElementById(id);
+const DIG="٠١٢٣٤٥٦٧٨٩", key="sa3aBet3abProgressV3";
+const ar=n=>String(n).replace(/\d/g,d=>DIG[d]);
+const defaults={stars:0,correct:0,rounds:0,streak:0,bestStreak:0,speech:true,sound:true,level:"hours",missed:0};
+let stats={...defaults};try{stats={...defaults,...JSON.parse(localStorage.getItem(key)||"{}")}}catch(e){}
+let view="play",mode="free",hour=3,minute=0,target={hour:3,minute:0},questionNo=0,maxQuestions=5,roundCorrect=0,checked=false,hintUsed=false,dragHand=null,questionStarted=false,toastTimer=null;
+function save(){try{localStorage.setItem(key,JSON.stringify(stats))}catch(e){}renderStats();renderSettings()}
+function polar(deg,r){let a=(deg-90)*Math.PI/180;return{x:160+Math.cos(a)*r,y:160+Math.sin(a)*r}}
+function svgLine(x1,y1,x2,y2,cls){let e=document.createElementNS("http://www.w3.org/2000/svg","line");Object.entries({x1,y1,x2,y2,class:cls}).forEach(([k,v])=>e.setAttribute(k,v));return e}
+function svgText(x,y,t,cls){let e=document.createElementNS("http://www.w3.org/2000/svg","text");e.setAttribute("x",x);e.setAttribute("y",y);e.setAttribute("class",cls);e.textContent=t;return e}
+for(let i=0;i<60;i++){let a=i*6,p1=polar(a,i%5===0?127:133),p2=polar(a,i%5===0?139:138);$("ticks").appendChild(svgLine(p1.x,p1.y,p2.x,p2.y,i%5===0?"tick major":"tick"));if(i%5===0){let n=i/5||12,p=polar(a,108);$("numbers").appendChild(svgText(p.x,p.y,ar(n),"hour-num"));let mp=polar(a,79);$("minuteLabels").appendChild(svgText(mp.x,mp.y,ar(i),"minute-num"));}}
+function renderClock(){let hp=polar(((hour%12)+minute/60)*30,72),mp=polar(minute*6,105);$("hourHand").setAttribute("x2",hp.x);$("hourHand").setAttribute("y2",hp.y);$("minuteHand").setAttribute("x2",mp.x);$("minuteHand").setAttribute("y2",mp.y);$("digitalTime").textContent=ar(hour)+":"+ar(String(minute).padStart(2,"0"));$("hourHand").setAttribute("aria-valuetext","الساعة "+ar(hour));$("minuteHand").setAttribute("aria-valuetext",ar(minute)+" دقيقة")}
+function point(evt){let r=$("clock").getBoundingClientRect();return{x:(evt.clientX-r.left)*320/r.width,y:(evt.clientY-r.top)*320/r.height}}
+function angleAt(p){return(Math.atan2(p.y-160,p.x-160)*180/Math.PI+450)%360}
+function drag(hand,e){let a=angleAt(point(e));if(hand==="minute"){minute=(Math.round(a/30)*5)%60}else{hour=(Math.round(a/30)%12)||12}checked=false;renderClock()}
+["hourHand","minuteHand"].forEach(id=>{let el=$(id),hand=id==="hourHand"?"hour":"minute";el.addEventListener("pointerdown",e=>{dragHand=hand;el.setPointerCapture(e.pointerId);e.preventDefault()});el.addEventListener("pointermove",e=>{if(dragHand===hand)drag(hand,e)});el.addEventListener("pointerup",()=>dragHand=null);el.addEventListener("pointercancel",()=>dragHand=null);el.addEventListener("keydown",e=>{if(!["ArrowRight","ArrowLeft","ArrowUp","ArrowDown"].includes(e.key))return;e.preventDefault();if(hand==="minute")minute=(minute+(e.key==="ArrowLeft"||e.key==="ArrowDown"?55:5))%60;else hour=(hour+(e.key==="ArrowLeft"||e.key==="ArrowDown"?10:1)-1)%12+1;renderClock()})});
+function cue(type="tap"){if(!stats.sound)return;try{let C=window.AudioContext||window.webkitAudioContext;if(!C)return;let c=new C(),t=c.currentTime,seq=type==="good"?[659,784,988,1175]:type==="try"?[392,330]:[523];seq.forEach((f,i)=>{let o=c.createOscillator(),g=c.createGain();o.type=type==="good"?"sine":"triangle";o.frequency.setValueAtTime(f,t+i*.085);g.gain.setValueAtTime(.0001,t+i*.085);g.gain.exponentialRampToValueAtTime(.085,t+i*.085+.02);g.gain.exponentialRampToValueAtTime(.0001,t+i*.085+.16);o.connect(g);g.connect(c.destination);o.start(t+i*.085);o.stop(t+i*.085+.18)});setTimeout(()=>c.close().catch(()=>{}),800)}catch(e){}}
+function speak(text){if(!stats.speech)return;if(!("speechSynthesis"in window)){feedback("الصوت المنطوق مش متاح على الجهاز ده، بس تقدري تكمّلي من الكلام المكتوب.","try");return}try{speechSynthesis.cancel();let u=new SpeechSynthesisUtterance(text);u.lang="ar-EG";u.rate=.83;u.pitch=1.12;let voices=speechSynthesis.getVoices();let v=voices.find(x=>/ar-EG/i.test(x.lang))||voices.find(x=>/^ar/i.test(x.lang));if(v)u.voice=v;speechSynthesis.speak(u)}catch(e){feedback("الصوت مش متاح دلوقتي. كمّلي من التعليمات المكتوبة.","try")}}
+function words(h,m){let hs={1:"واحدة",2:"اتنين",3:"تلاتة",4:"أربعة",5:"خمسة",6:"ستة",7:"سبعة",8:"تمانية",9:"تسعة",10:"عشرة",11:"حداشر",12:"اتناشر"};if(m===0)return"الساعة "+hs[h]+" بالظبط";let min={5:"خمسة",10:"عشرة",15:"ربع",20:"عشرين",25:"خمسة وعشرين",30:"نص",35:"خمسة وتلاتين",40:"أربعين",45:"إلا ربع",50:"إلا عشرة",55:"إلا خمسة"};if(m===15)return"الساعة "+hs[h]+" وربع";if(m===30)return"الساعة "+hs[h]+" ونص";if(m<30)return"الساعة "+hs[h]+" و"+min[m]+" دقيقة";if(m===45)return"الساعة "+hs[h]+" إلا ربع";if(m>=35){let next=h%12+1;return"الساعة "+hs[next]+" إلا "+({35:"خمسة وعشرين دقيقة",40:"عشرين دقيقة",50:"عشر دقايق",55:"خمس دقايق"}[m])}return"الساعة "+hs[h]+" و"+min[m]+" دقيقة"}
+function feedback(text,type=""){let f=$("feedback");f.textContent=text;f.className="feedback"+(type?" "+type:"");if(type==="good")cue("good");else if(type==="try")cue("try")}
+function toast(t){let el=$("toast");el.textContent=t;el.classList.remove("hidden");clearTimeout(toastTimer);toastTimer=setTimeout(()=>el.classList.add("hidden"),2400)}
+function renderStats(){$("starsTop").textContent=ar(stats.stars);$("statStars").textContent=ar(stats.stars);$("statCorrect").textContent=ar(stats.correct);$("statRounds").textContent=ar(stats.rounds);let a=[];if(stats.stars>=1)a.push("⭐ أول نجمة");if(stats.stars>=5)a.push("🌟 صائدة النجوم");if(stats.bestStreak>=3)a.push("🔥 سلسلة الإجابات الصح");if(stats.correct>=20)a.push("🏆 خبيرة الساعة");$("awards").innerHTML=a.length?a.map(x=>'<span class="award">'+x+'</span>').join(""):'<span class="award">🌱 أول إنجاز مستنيكي!</span>';$("progressAdvice").textContent=stats.rounds===0?"ابدئي بخمس دقايق لعب كل يوم.":stats.missed>stats.correct?"ركّزي على العقرب الأزرق: كل رقم يساوي خمس دقايق.":"عاش يا بطلة! جرّبي مرحلة أصعب لما تحسي إنك جاهزة."}
+function renderSettings(){$("speechToggle").classList.toggle("on",stats.speech);$("soundToggle").classList.toggle("on",stats.sound);$("levelSelect").value=stats.level}
+function showView(v){view=v;["play","learn","progress","parent"].forEach(x=>$(x+"View").classList.toggle("hidden",x!==v));document.querySelectorAll(".tab").forEach(b=>b.classList.toggle("active",b.dataset.view===v));if(v==="progress")renderStats();if(v==="parent")renderSettings();if(v==="play"&&mode==="free"){ $("greeting").textContent="أهلًا يا بطلة الساعة! 🌈";$("subtitle").textContent="العقرب البرتقاني للساعات، والأزرق للدقايق."}}
+function pickTarget(){let h=1+Math.floor(Math.random()*12),m=0;let level=stats.level;if(level==="five"||level==="mixed"||(mode==="challenge"&&questionNo>1)){m=[5,10,15,20,25,30,35,40,45,50,55][Math.floor(Math.random()*11)]}return{hour:h,minute:m}}
+function updateProgress(){let n=Math.min(questionNo,maxQuestions);$("progressBar").style.width=(mode==="free"?0:((n-1)/maxQuestions*100))+"%";$("progressLabel").textContent=mode==="free"?"تجربة حرّة":"السؤال "+ar(n)+" من "+ar(maxQuestions);$("accuracyLabel").textContent=stats.streak? "سلسلة صح: "+ar(stats.streak)+" 🔥":"كل محاولة بتعلّمنا!"}
+function newQuestion(){checked=false;hintUsed=false;hour=3;minute=0;if(mode==="free"){$("roundLabel").textContent="تجربة حرّة";$("questionTitle").textContent="خلّينا نجرّب!";$("questionText").textContent="حرّكي العقارب وشوفي الوقت بيتغيّر. اضغطي «اسمعي الوقت» لو حابة."; $("checkBtn").textContent="ابدئي التدريب 🎯"}else{target=pickTarget();$("roundLabel").textContent=mode==="challenge"?"🏆 تحدّي الأبطال":"🎯 تدريب خطوة خطوة";$("questionTitle").textContent=mode==="challenge"?"يا ترى الساعة كام؟":"اضبطي العقارب";$("questionText").textContent="خلّي العقارب تشير إلى "+words(target.hour,target.minute)+"، وبعدين اتأكدي من إجابتك."; $("checkBtn").textContent="اتأكدي من إجابتي ✓"}renderClock();feedback("خدي وقتك يا بطلة. تقدري تغيّري العقارب بالسحب أو بالأزرار 💜");updateProgress()}
+function startRound(which){mode=which;questionNo=1;roundCorrect=0;maxQuestions=which==="challenge"?10:5;showView("play");$("greeting").textContent=which==="challenge"?"تحدّي الدقايق 🏆":"وقت التدريب 🎯";$("subtitle").textContent=which==="challenge"?"ركّزي واجمعي أكبر عدد من النجوم!":"نبدأ واحدة واحدة، ومفيش استعجال.";newQuestion()}
+function nextQuestion(){if(questionNo>=maxQuestions){$("questionTitle").textContent="خلصت الجولة! 🎉";$("questionText").textContent="جاوبتي صح على "+ar(roundCorrect)+" من "+ar(maxQuestions)+" أسئلة. إنتِ شاطرة!";feedback("برافو يا بطلة! افتحي إنجازاتي وشوفي النجوم اللي جمعتيها 🌟","good");$("progressBar").style.width="100%";$("checkBtn").textContent="جولة جديدة 🎮";mode="roundDone";return}questionNo++;newQuestion()}
+function check(){if(mode==="free"){startRound("practice");return}if(mode==="roundDone"){startRound("practice");return}if(checked)return;stats.rounds++;let ok=hour===target.hour&&minute===target.minute;checked=true;if(ok){stats.correct++;stats.stars++;stats.streak++;stats.bestStreak=Math.max(stats.bestStreak,stats.streak);roundCorrect++;save();feedback("برافو عليكي! 🎉 إجابة صح. "+words(target.hour,target.minute)+"، ممتازة يا بطلة!","good");speak("برافو عليكي، إجابة صح!");if(!hintUsed)burst();setTimeout(nextQuestion,1050)}else{stats.missed++;stats.streak=0;save();checked=false;feedback("قريبة! المطلوب "+words(target.hour,target.minute)+". بصّي على البرتقاني للساعة، والأزرق للدقايق. جرّبي تاني 💜","try");speak("ولا يهمك، نجرب تاني. المطلوب "+words(target.hour,target.minute));}}
+function burst(){let b=document.createElement("span");b.className="stars-burst";b.textContent="⭐✨";b.style.left=(45+Math.random()*20)+"%";b.style.top="42%";$("playView").appendChild(b);setTimeout(()=>b.remove(),850)}
+function hint(){hintUsed=true;if(mode==="free"){feedback("جرّبي تحرّكي العقرب الأزرق خمس دقايق كل مرة، والبرتقاني ساعة ساعة.");speak("العقرب القصير للساعات، والطويل للدقايق. كل رقم على الساعة يساوي خمس دقايق.");return}let h=target.hour,m=target.minute;feedback("مساعدة: البرتقاني عند "+ar(h)+". الأزرق عند "+ar(m)+" دقيقة. عدّي بالخمسات!","");speak("العقرب القصير عند الساعة "+ar(h)+". والعقرب الطويل محتاج يشاور على "+ar(m)+" دقيقة.")}
+function adjust(type,delta){if(type==="hour")hour=(hour+delta+11)%12+1;else{let total=hour*60+minute+delta;total=((total%(12*60))+(12*60))%(12*60);hour=Math.floor(total/60)||12;minute=total%60}checked=false;renderClock()}
+$("hourBack").onclick=()=>adjust("hour",-1);$("hourForward").onclick=()=>adjust("hour",1);$("minuteBack").onclick=()=>adjust("minute",-5);$("minuteForward").onclick=()=>adjust("minute",5);$("hearBtn").onclick=()=>speak(words(hour,minute));$("hintBtn").onclick=hint;$("checkBtn").onclick=check;
+document.querySelectorAll(".tab").forEach(b=>b.addEventListener("click",()=>{let v=b.dataset.view;showView(v);if(v==="play"&&mode==="free")newQuestion()}));
+$("practiceFromLearn").onclick=()=>startRound("practice");$("continueBtn").onclick=()=>startRound("practice");$("settingsBtn").onclick=()=>showView("parent");
+$("hearLesson").onclick=()=>speak("العقرب القصير بيقول الساعة كام. العقرب الطويل بيقول الدقايق. كل رقم بنزوده خمس دقايق. رقم تلاتة يعني ربع ساعة، ورقم ستة يعني نص ساعة.");
+$("speechToggle").onclick=()=>{stats.speech=!stats.speech;save();cue("tap");if(stats.speech)speak("أهلًا يا بطلة! يلا نتعلم الساعة");};$("soundToggle").onclick=()=>{stats.sound=!stats.sound;save();if(stats.sound)cue("good")};
+$("levelSelect").onchange=e=>{stats.level=e.target.value;save();toast("اتغيّر مستوى التدريب 👍")};
+$("testVoice").onclick=()=>{speak("أهلًا يا بطلة! أنا البومة صاحبتك، هنلعب ونتعلم الساعة واحدة واحدة.");if(!stats.speech)toast("فعّلي الصوت المنطوق الأول من الزر اللي فوق.")};
+$("resetProgress").onclick=()=>{if(confirm("متأكدة إنك عايزة تمسحي كل النجوم والتقدّم؟")){stats={...defaults,speech:stats.speech,sound:stats.sound,level:stats.level};save();toast("رجعنا نبدأ من الأول 🌱")}};
+window.addEventListener("pagehide",()=>{try{if("speechSynthesis"in window)speechSynthesis.cancel()}catch(e){}});
+renderStats();renderSettings();renderClock();newQuestion();
+if("serviceWorker"in navigator && location.protocol.startsWith("http"))window.addEventListener("load",()=>navigator.serviceWorker.register("./sw.js").catch(()=>{}));
+})();
+</script>
+</body>
+</html>
